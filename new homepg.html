@@ -1,0 +1,1481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               viewport-fit=cover">
+
+<meta name="theme-color" content="#e87817">
+
+<title>H.O. Jewellers</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+/* =========================================================
+   BASIC RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: "Montserrat", sans-serif;
+
+    color: #4b2a16;
+
+    background:
+        radial-gradient(circle at 20% 10%,
+        rgba(255,255,255,.9),
+        transparent 25%),
+
+        radial-gradient(circle at 80% 20%,
+        rgba(244,166,77,.18),
+        transparent 30%),
+
+        linear-gradient(
+            135deg,
+            #fff8ea,
+            #f8dfbd 45%,
+            #fff8ea
+        );
+
+    overflow-x: hidden;
+
+    padding-top: max(22px, env(safe-area-inset-top));
+    padding-bottom: max(90px, env(safe-area-inset-bottom));
+
+    position: relative;
+}
+
+
+/* =========================================================
+   CINEMATIC LIGHT
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,145,42,.25),
+            transparent 70%
+        );
+
+    top: 5%;
+    left: -180px;
+
+    filter: blur(20px);
+
+    animation: lightMove 12s ease-in-out infinite alternate;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,199,115,.3),
+            transparent 70%
+        );
+
+    right: -150px;
+    bottom: 10%;
+
+    filter: blur(20px);
+
+    animation: lightMove2 14s ease-in-out infinite alternate;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+@keyframes lightMove {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(260px,120px);
+    }
+}
+
+@keyframes lightMove2 {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(-220px,-100px);
+    }
+}
+
+
+/* =========================================================
+   TOP BRAND AREA
+========================================================= */
+
+.brand {
+
+    text-align: center;
+
+    padding:
+        25px
+        18px
+        18px;
+
+    animation: brandReveal 1.2s ease both;
+}
+
+@keyframes brandReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.brand h1 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(30px, 8vw, 55px);
+
+    letter-spacing: 4px;
+
+    color: #a94f0d;
+
+    text-shadow:
+        0 2px 0 #ffe5bd,
+        0 5px 15px rgba(157,76,15,.2);
+}
+
+.tagline {
+
+    margin-top: 8px;
+
+    font-weight: 800;
+
+    font-size: clamp(13px, 3.7vw, 20px);
+
+    letter-spacing: 1px;
+
+    color: #693615;
+}
+
+.trust {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+    padding-left: 5px;
+
+    font-size: 12px;
+
+    font-style: italic;
+
+    color: #7b4a2c;
+}
+
+.trust i {
+
+    color: #d98a18;
+
+    font-size: 21px;
+
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.15));
+}
+
+
+/* =========================================================
+   APP NAVIGATION
+========================================================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: max(8px, env(safe-area-inset-top));
+
+    z-index: 50;
+
+    margin:
+        5px
+        14px
+        25px;
+
+    padding: 8px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        1.45fr;
+
+    gap: 7px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,247,230,.83);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    border:
+        1px solid
+        rgba(192,104,28,.2);
+
+    box-shadow:
+        0 10px 35px rgba(105,56,20,.13);
+}
+
+.nav-btn {
+
+    min-height: 52px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        transparent;
+
+    color: #6a3515;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        .25s ease;
+
+    text-decoration: none;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.nav-btn i {
+
+    font-size: 20px;
+}
+
+.nav-btn.about {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+.nav-btn::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 0;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+
+    background:
+        rgba(230,126,34,.12);
+
+    transition: .3s ease;
+
+    transform: translateX(-50%);
+}
+
+.nav-btn:hover::after,
+.nav-btn:active::after {
+
+    width: 100%;
+}
+
+.nav-btn:active {
+
+    transform: scale(.91);
+
+    background: #f4d1a7;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    margin:
+        0 15px
+        25px;
+
+    min-height: 145px;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 28px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #d96510,
+            #f39a35 45%,
+            #f5c27d
+        );
+
+    box-shadow:
+        0 20px 45px rgba(143,65,13,.22);
+
+    color: white;
+}
+
+.hero::before {
+
+    content: "✦";
+
+    position: absolute;
+
+    right: 22px;
+    top: 10px;
+
+    font-size: 100px;
+
+    opacity: .12;
+
+    transform: rotate(20deg);
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -80px;
+    bottom: -130px;
+
+    border-radius: 50%;
+
+    border: 35px solid rgba(255,255,255,.12);
+}
+
+.hero-text {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.hero h2 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: clamp(22px,6vw,34px);
+
+    margin-bottom: 7px;
+}
+
+.hero p {
+
+    font-size: 12px;
+
+    max-width: 270px;
+
+    line-height: 1.6;
+
+    opacity: .92;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+
+    padding:
+        0 18px
+        14px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.section-title h2 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 21px;
+
+    color: #743b19;
+}
+
+.section-title span {
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    color: #aa6b3e;
+}
+
+
+/* =========================================================
+   CARD GRID
+========================================================= */
+
+.cards {
+
+    padding:
+        0 15px
+        20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card {
+
+    min-height: 180px;
+
+    border-radius: 25px;
+
+    padding: 20px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    border:
+        1px solid
+        rgba(255,255,255,.55);
+
+    box-shadow:
+        0 14px 30px
+        rgba(87,42,15,.13);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    animation: cardAppear .8s ease both;
+}
+
+.card:nth-child(1){animation-delay:.05s}
+.card:nth-child(2){animation-delay:.12s}
+.card:nth-child(3){animation-delay:.19s}
+.card:nth-child(4){animation-delay:.26s}
+.card:nth-child(5){animation-delay:.33s}
+.card:nth-child(6){animation-delay:.40s}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.card:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.015);
+
+    box-shadow:
+        0 22px 42px
+        rgba(87,42,15,.2);
+}
+
+.card:active {
+
+    transform:
+        scale(.94)
+        rotateX(2deg);
+}
+
+
+/* card shine */
+
+.card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+    height: 300px;
+
+    top: -50px;
+    left: -120px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
+
+    transform: rotate(20deg);
+
+    transition: 1s;
+}
+
+.card:hover::before {
+
+    left: 130%;
+}
+
+
+/* decorative circle */
+
+.card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    right: -35px;
+    bottom: -35px;
+
+    background:
+        rgba(255,255,255,.15);
+}
+
+
+/* =========================================================
+   CARD THEMES
+========================================================= */
+
+.rate {
+    background:
+        linear-gradient(145deg,#fff0d4,#f5b866);
+}
+
+.gallery {
+    background:
+        linear-gradient(145deg,#fff3db,#e9bd65);
+}
+
+.preorder {
+    background:
+        linear-gradient(145deg,#f6e3c5,#d8c3a0);
+}
+
+.natural {
+    background:
+        linear-gradient(145deg,#fff3d8,#d8e4c1);
+}
+
+.services {
+    background:
+        linear-gradient(145deg,#ffe7ba,#e5a943);
+}
+
+.help {
+    background:
+        linear-gradient(145deg,#f8e9d9,#d8c8b8);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-icon {
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,.42);
+
+    box-shadow:
+        inset 0 1px 4px rgba(255,255,255,.8),
+        0 6px 12px rgba(91,44,10,.1);
+}
+
+.card-icon i {
+
+    font-size: 25px;
+
+    color: #934a13;
+}
+
+.card h3 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 16px;
+
+    margin-top: 10px;
+}
+
+.card p {
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    opacity: .72;
+
+    max-width: 170px;
+}
+
+.arrow {
+
+    position: absolute;
+
+    right: 17px;
+    top: 18px;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.5);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   OFFLINE STORE
+========================================================= */
+
+.location {
+
+    margin:
+        10px 15px
+        25px;
+
+    padding: 22px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255,249,238,.8);
+
+    backdrop-filter: blur(12px);
+
+    border:
+        1px solid
+        rgba(183,101,29,.18);
+
+    box-shadow:
+        0 12px 30px rgba(89,44,15,.1);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.location-icon {
+
+    min-width: 54px;
+    height: 54px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        #f2c27e;
+
+    color: #7d3d12;
+
+    font-size: 22px;
+}
+
+.location-info {
+
+    flex: 1;
+}
+
+.location-info small {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: #a56a40;
+}
+
+.location-info p {
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-top: 4px;
+
+    font-weight: 600;
+}
+
+.map-button {
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #fff;
+
+    color: #df6e18;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 15px rgba(80,40,10,.12);
+
+    transition: .2s;
+}
+
+.map-button:active {
+
+    transform: scale(.86);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    padding: 20px;
+
+    font-size: 10px;
+
+    color: #916344;
+
+    letter-spacing: .4px;
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating {
+
+    position: fixed;
+
+    z-index: 100;
+
+    bottom:
+        max(25px, env(safe-area-inset-bottom));
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 12px 25px rgba(63,31,8,.25);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    animation: floatIn .8s ease both;
+}
+
+@keyframes floatIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.floating:active {
+
+    transform: scale(.84);
+}
+
+.floating i {
+
+    font-size: 25px;
+}
+
+.whatsapp {
+
+    right: 22px;
+
+    background:
+        #25D366;
+
+    color: white;
+}
+
+.dial {
+
+    left: 22px;
+
+    background:
+        #e77819;
+
+    color: white;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+    body {
+        max-width: 1050px;
+        margin: auto;
+    }
+
+    .cards {
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .card {
+
+        min-height: 210px;
+    }
+
+    .navbar {
+
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero {
+
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .location {
+
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     BRAND
+======================================================= -->
+
+<header class="brand">
+
+    <h1>H.O. Jewellers</h1>
+
+    <div class="tagline">
+        Jewellery Which Defines You
+    </div>
+
+    <div class="trust">
+
+        <!-- Official hallmark-style symbol -->
+        <i class="fa-solid fa-certificate"></i>
+
+        <span>
+            A Trusted BIS Certified Store
+        </span>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     TOP NAVIGATION
+======================================================= -->
+
+<nav class="navbar">
+
+    <!-- HOME -->
+    <a class="nav-btn"
+       href="home.html"
+       aria-label="Home">
+
+        <i class="fa-solid fa-house"></i>
+
+    </a>
+
+
+    <!-- NOTIFICATIONS -->
+    <a class="nav-btn"
+       href="notifications.html"
+       aria-label="Notifications">
+
+        <i class="fa-solid fa-bell"></i>
+
+    </a>
+
+
+    <!-- SETTINGS -->
+    <a class="nav-btn"
+       href="settings.html"
+       aria-label="Settings">
+
+        <i class="fa-solid fa-gear"></i>
+
+    </a>
+
+
+    <!-- ABOUT US -->
+    <a class="nav-btn about"
+       href="about.html">
+
+        About Us
+
+    </a>
+
+</nav>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h2>Elegance, Crafted.</h2>
+
+        <p>
+            Discover timeless jewellery, trusted craftsmanship
+            and a shopping experience designed around you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     SECTION TITLE
+======================================================= -->
+
+<div class="section-title">
+
+    <h2>Explore H.O. Jewellers</h2>
+
+    <span>COLLECTIONS</span>
+
+</div>
+
+
+<!-- =======================================================
+     MAIN CARDS
+======================================================= -->
+
+<main class="cards">
+
+
+    <!-- CURRENT RATES -->
+
+    <a href="current-rates.html"
+       class="card rate">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Current Rates</h3>
+
+            <p>
+                Check the latest gold and silver rates
+                with a visual market-style interface.
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- PRODUCT GALLERY -->
+
+    <a href="gallery.html"
+       class="card gallery">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-gem"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Product Gallery</h3>
+
+            <p>
+                Explore beautifully crafted gold
+                ornaments and jewellery collections.
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- PRE ORDERS -->
+
+    <a href="pre-orders.html"
+       class="card preorder">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-ring"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Pre Orders</h3>
+
+            <p>
+                Request specially crafted gold and
+                silver jewellery before visiting.
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- OTHER THAN GOLD & SILVER -->
+
+    <a href="other-products.html"
+       class="card natural">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-butterfly"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Other than Gold & Silver</h3>
+
+            <p>
+                Discover selected products inspired
+                by nature and everyday elegance.
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- OTHER SERVICES -->
+
+    <a href="services.html"
+       class="card services">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-coins"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Other Services</h3>
+
+            <p>
+                Jewellery services, maintenance,
+                verification and more.
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- HELP -->
+
+    <a href="help.html"
+       class="card help">
+
+        <span class="arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+        <div class="card-icon">
+
+            <i class="fa-solid fa-headset"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Help</h3>
+
+            <p>
+                Get assistance with the website,
+                orders, services and technical issues.
+            </p>
+
+        </div>
+
+    </a>
+
+</main>
+
+
+<!-- =======================================================
+     OFFLINE STORE LOCATION
+======================================================= -->
+
+<section class="location">
+
+    <div class="location-icon">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+    </div>
+
+
+    <div class="location-info">
+
+        <small>
+            Offline Store
+        </small>
+
+        <p>
+            Main Road, Near Bank of Baroda,
+            Gola, Ramgarh (JH)
+        </p>
+
+    </div>
+
+
+    <!-- GOOGLE MAP LINK -->
+
+    <a
+        class="map-button"
+        href="https://www.google.com/maps/search/?api=1&query=H.O.+Jewellers,+Main+Road,+Gola,+Ramgarh,+Jharkhand"
+        target="_blank"
+        rel="noopener"
+        aria-label="Open location in Google Maps">
+
+        <i class="fa-solid fa-map-location-dot"></i>
+
+    </a>
+
+</section>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    © H.O. Jewellers • Jewellery Which Defines You
+
+</footer>
+
+
+<!-- =======================================================
+     FLOATING WHATSAPP
+======================================================= -->
+
+<a
+    class="floating whatsapp"
+    href="https://wa.me/91XXXXXXXXXX"
+    target="_blank"
+    rel="noopener"
+    aria-label="WhatsApp">
+
+    <i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+
+<!-- =======================================================
+     FLOATING DIALER
+======================================================= -->
+
+<a
+    class="floating dial"
+    href="tel:+91XXXXXXXXXX"
+    aria-label="Call H.O. Jewellers">
+
+    <i class="fa-solid fa-phone"></i>
+
+</a>
+
+
+<!-- =======================================================
+     TOUCH INTERACTION
+======================================================= -->
+
+<script>
+
+document.querySelectorAll(".card").forEach(card => {
+
+    card.addEventListener("pointerdown", () => {
+
+        card.style.transform =
+            "scale(.94)";
+
+    });
+
+    card.addEventListener("pointerup", () => {
+
+        card.style.transform =
+            "";
+
+    });
+
+    card.addEventListener("pointerleave", () => {
+
+        card.style.transform =
+            "";
+
+    });
+
+});
+
+
+/* Small cinematic entrance */
+
+window.addEventListener("load", () => {
+
+    document.body.classList.add("loaded");
+
+});
+
+</script>
+
+
+</body>
+</html>
+
