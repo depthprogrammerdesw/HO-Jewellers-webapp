@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#e87817" />
+  <title>H.O. Jewellers · Notifications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; overflow-x: hidden; color: #4b2a16; font-family: Montserrat, sans-serif; background: radial-gradient(circle at 15% 10%, rgba(255,255,255,.95), transparent 24%), radial-gradient(circle at 85% 20%, rgba(244,166,77,.24), transparent 30%), linear-gradient(135deg, #fff8ea, #f8dfbd 48%, #fff8ea); }
+    body::before { position: fixed; inset: 0; z-index: -2; pointer-events: none; content: ""; opacity: .24; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E"); mix-blend-mode: multiply; }
+    .page { position: relative; width: min(100% - 36px, 760px); margin: 0 auto; padding: 24px 0 42px; }
+    .glow { position: fixed; z-index: -1; width: 290px; height: 290px; border-radius: 50%; pointer-events: none; filter: blur(14px); opacity: .65; }
+    .glow-left { top: 90px; left: -180px; background: radial-gradient(circle, rgba(255,145,42,.27), transparent 70%); animation: glow-one 12s ease-in-out infinite alternate; }
+    .glow-right { right: -170px; bottom: 80px; background: radial-gradient(circle, rgba(255,199,115,.3), transparent 70%); animation: glow-two 14s ease-in-out infinite alternate; }
+    @keyframes glow-one { to { transform: translate(230px,120px); } }
+    @keyframes glow-two { to { transform: translate(-190px,-100px); } }
+    .brand-header { display: flex; align-items: center; gap: 12px; padding: 7px 0 20px; border-bottom: 1px solid rgba(185,101,29,.2); animation: drop .8s ease both; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
+    .brand-copy { flex: 1; }
+    .brand-copy h1 { color: #a94f0d; font-family: Cinzel, serif; font-size: clamp(23px, 5vw, 34px); font-weight: 700; letter-spacing: 2px; text-shadow: 0 2px 0 #ffe5bd; }
+    .brand-copy p { margin-top: 5px; color: #7b4a2c; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .status { display: inline-flex; align-items: center; gap: 6px; color: #895321; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #d98a18; box-shadow: 0 0 0 4px rgba(217,138,24,.12); }
+    .status.live .status-dot { background: #5c8b55; box-shadow: 0 0 0 4px rgba(92,139,85,.12); }
+    .intro { position: relative; display: flex; align-items: center; gap: 16px; margin: 32px 0 22px; overflow: hidden; padding: 20px 21px; border: 1px solid rgba(192,104,28,.22); border-radius: 22px; color: white; background: linear-gradient(120deg, #d96510, #f39a35 45%, #f5c27d); box-shadow: 0 17px 35px rgba(143,65,13,.2); animation: rise .7s .1s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .intro::after { position: absolute; right: 10px; top: -18px; content: "✦"; opacity: .17; font-size: 86px; transform: rotate(18deg); }
+    .intro-icon { display: grid; width: 48px; height: 48px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(255,255,255,.45); border-radius: 16px; background: rgba(255,255,255,.24); font-size: 23px; }
+    .intro-overline { margin-bottom: 3px; color: rgba(255,255,255,.78); font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
+    .intro h2 { position: relative; z-index: 1; font-family: Cinzel, serif; font-size: clamp(23px, 6vw, 34px); letter-spacing: .8px; }
+    .intro p:last-child { max-width: 450px; margin-top: 5px; color: rgba(255,255,255,.9); font-size: 12px; line-height: 1.45; }
+    .board { padding: 17px 0 20px; }
+    .board-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 14px; }
+    .board-label { color: #aa6b3e; font-size: 10px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
+    .board h3 { margin-top: 5px; color: #743b19; font-family: Cinzel, serif; font-size: 22px; }
+    button { font: inherit; }
+    .refresh { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; border: 1px solid rgba(192,104,28,.25); border-radius: 12px; padding: 0 12px; color: #743b19; background: rgba(255,247,230,.72); font-size: 10px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .refresh:hover { background: #f4d1a7; transform: translateY(-2px); }
+    .notice-list { display: grid; gap: 12px; }
+    .notice { position: relative; display: flex; align-items: center; gap: 14px; min-height: 83px; overflow: hidden; border: 1px solid rgba(255,255,255,.72); border-radius: 19px; padding: 14px 19px; box-shadow: 0 11px 25px rgba(87,42,15,.12); transition: transform .25s ease, box-shadow .25s ease; animation: slide .65s ease both; }
+    .notice:nth-child(1) { animation-delay: .05s; background: linear-gradient(110deg, #fff0d4, #f5b866); }
+    .notice:nth-child(2) { animation-delay: .13s; background: linear-gradient(110deg, #fff3db, #e9bd65); }
+    .notice:nth-child(3) { animation-delay: .21s; background: linear-gradient(110deg, #f6e3c5, #d8c3a0); }
+    .notice:nth-child(4) { animation-delay: .29s; background: linear-gradient(110deg, #fff3d8, #d8e4c1); }
+    @keyframes slide { from { opacity: 0; transform: translateX(-22px) scale(.98); } to { opacity: 1; transform: none; } }
+    .notice:hover { box-shadow: 0 17px 34px rgba(87,42,15,.18); transform: translateX(5px); }
+    .notice::before { position: absolute; width: 70px; height: 180px; left: -120px; top: -48px; content: ""; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: rotate(20deg); transition: left .9s ease; }
+    .notice:hover::before { left: 110%; }
+    .notice-number { color: rgba(115,59,25,.55); font-family: Cinzel, serif; font-size: 13px; font-weight: 700; }
+    .notice-icon { display: grid; width: 42px; height: 42px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 14px; color: #934a13; background: rgba(255,255,255,.42); font-size: 18px; }
+    .notice p { position: relative; z-index: 1; flex: 1; color: #5b3019; font-size: 13px; font-weight: 600; line-height: 1.45; }
+    .arrow { color: rgba(105,56,20,.55); font-size: 24px; }
+    .sync { margin-top: 15px; color: #a56a40; font-size: 10px; text-align: center; }
+    .error { margin-top: 12px; color: #9a4a2e; font-size: 11px; text-align: center; }
+    .contact { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 14px; padding: 19px 0 0; border-top: 1px solid rgba(192,104,28,.2); }
+    .contact p { color: #743b19; font-family: Cinzel, serif; font-size: 14px; font-weight: 700; }
+    .contact span { display: block; margin-top: 4px; color: #a56a40; font-size: 10px; }
+    .contact a { display: inline-flex; align-items: center; gap: 8px; min-height: 43px; border-radius: 14px; padding: 0 16px; color: #fff8ea; background: #a94f0d; box-shadow: 0 8px 16px rgba(143,65,13,.18); font-size: 11px; font-weight: 800; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+    .contact a:hover { background: #7d3d12; transform: translateY(-2px); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinning { animation: spin .9s linear infinite; }
+    @media (max-width: 560px) {
+      .page { width: min(100% - 36px, 760px); padding-top: 17px; }
+      .brand-copy h1 { font-size: 23px; letter-spacing: 1px; }
+      .brand-copy p { font-size: 8px; letter-spacing: .7px; }
+      .status { font-size: 8px; }
+      .intro { margin-top: 26px; padding: 19px 16px; }
+      .intro p:last-child { font-size: 11px; }
+      .board-heading { align-items: flex-start; flex-direction: column; }
+      .refresh { width: 100%; justify-content: center; }
+      .notice { min-height: 88px; gap: 10px; padding: 13px 14px; }
+      .notice-number { font-size: 11px; }
+      .notice-icon { width: 36px; height: 36px; border-radius: 12px; }
+      .notice p { font-size: 12px; }
+      .contact { align-items: stretch; flex-direction: column; }
+      .contact a { justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="glow glow-left"></div><div class="glow glow-right"></div>
+    <header class="brand-header">
+      <div class="brand-copy"><h1>H.O. Jewellers</h1><p>Trusted with brilliance</p></div>
+      <span class="status" id="status"><span class="status-dot"></span> Preview</span>
+    </header>
+
+    <section class="intro">
+      <div class="intro-icon">♧</div>
+      <div><p class="intro-overline">H.O. Jewellers</p><h2>Notifications</h2><p>The latest updates from our showroom, shared with our valued customers.</p></div>
+    </section>
+
+    <section class="board" aria-live="polite">
+      <div class="board-heading"><div><span class="board-label">✦ Notice board</span><h3>Latest from us</h3></div><button class="refresh" id="refresh">↻ &nbsp; Refresh</button></div>
+      <div class="notice-list" id="notice-list"></div>
+      <p class="error" id="error" hidden></p>
+      <p class="sync" id="sync">Connect your published CSV to show live notifications</p>
+    </section>
+
+    <footer class="contact">
+      <div><p>Need help or have a question?</p><span>Our team is happy to assist you.</span></div>
+      <a href="mailto:contact@hojewellers.com">✉ &nbsp; Contact Us</a>
+    </footer>
+  </div>
+
+  <script>
+    // Paste your Google Sheets published CSV URL between the quotes.
+    const GOOGLE_SHEET_CSV_URL = "";
+    const DEMO_MESSAGES = [
+      "Welcome to H.O. Jewellers. Please check this board for our latest updates.",
+      "Our latest jewellery collection is now available in the showroom.",
+      "Free jewellery cleaning is available for our valued customers this week.",
+      "Please contact us for the latest showroom timings and assistance."
+    ];
+    const list = document.getElementById("notice-list");
+    const refreshButton = document.getElementById("refresh");
+    const sync = document.getElementById("sync");
+    const error = document.getElementById("error");
+    const status = document.getElementById("status");
+
+    function firstCsvColumn(line) {
+      let value = "", quoted = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i], next = line[i + 1];
+        if (char === '"' && quoted && next === '"') { value += '"'; i++; }
+        else if (char === '"') quoted = !quoted;
+        else if (char === "," && !quoted) break;
+        else value += char;
+      }
+      return value.trim();
+    }
+
+    function parseMessages(csv) {
+      return csv.replace(/^\uFEFF/, "").split(/\r?\n/).filter(line => line.trim()).slice(1, 5).map(firstCsvColumn);
+    }
+
+    function draw(messages) {
+      list.innerHTML = "";
+      for (let i = 0; i < 4; i++) {
+        const row = document.createElement("article");
+        row.className = "notice";
+        row.innerHTML = `<span class="notice-number">0${i + 1}</span><span class="notice-icon">!</span><p>${escapeHtml(messages[i] || "This notice space is ready for an update.")}</p><span class="arrow">›</span>`;
+        list.appendChild(row);
+      }
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[char]));
+    }
+
+    async function loadMessages() {
+      refreshButton.disabled = true;
+      refreshButton.textContent = "↻  Checking";
+      error.hidden = true;
+      if (!GOOGLE_SHEET_CSV_URL) {
+        draw(DEMO_MESSAGES);
+        status.className = "status";
+        status.innerHTML = '<span class="status-dot"></span> Preview';
+        sync.textContent = "Connect your published CSV to show live notifications";
+        refreshButton.disabled = false;
+        refreshButton.textContent = "↻  Refresh";
+        return;
+      }
+      try {
+        const response = await fetch(GOOGLE_SHEET_CSV_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error("Sheet unavailable");
+        draw(parseMessages(await response.text()));
+        status.className = "status live";
+        status.innerHTML = '<span class="status-dot"></span> Live';
+        sync.textContent = "Automatically refreshed every minute from Google Sheets";
+      } catch {
+        error.hidden = false;
+        error.textContent = "The notice board could not connect to the sheet. Please try again.";
+      } finally {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "↻  Refresh";
+      }
+    }
+
+    draw(DEMO_MESSAGES);
+    refreshButton.addEventListener("click", loadMessages);
+    loadMessages();
+    setInterval(loadMessages, 60000);
+  </script>
+</body>
+</html>
